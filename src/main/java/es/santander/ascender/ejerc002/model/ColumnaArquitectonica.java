@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 
 @Entity
-public class Columna {
+public class ColumnaArquitectonica {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

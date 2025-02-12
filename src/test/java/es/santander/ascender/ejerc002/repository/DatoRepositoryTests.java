@@ -1,4 +1,4 @@
-package es.santander.ascender.ejerc002;
+package es.santander.ascender.ejerc002.repository;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
