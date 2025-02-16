@@ -7,32 +7,52 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "DATO")
-public class Dato {
+@Table(name = "Boligrafo")
+public class Boligrafo{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    
+
     private Long id;
     private String nombre;
+    private String color;
+    private boolean escribe;
 
-    public Dato() {
-
+    public Boligrafo(Object object, String string, String string2, boolean b) {
+        
     }
 
-    public Dato (Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
-
+    // Getters y setters
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public boolean isEscribe() {
+        return escribe;
+    }
+
+    public void setEscribe(boolean escribe) {
+        this.escribe = escribe;
+    }
+
 }

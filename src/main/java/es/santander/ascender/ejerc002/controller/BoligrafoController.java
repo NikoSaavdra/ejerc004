@@ -13,41 +13,40 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.santander.ascender.ejerc002.model.ColumnaArquitectonica;
-import es.santander.ascender.ejerc002.service.ColumnaArquitectonicaService;
+import es.santander.ascender.ejerc002.model.Boligrafo;
+import es.santander.ascender.ejerc002.service.BoligrafoService;
 
 @RestController
-@RequestMapping("/api/columna")
-public class ColumnaArquitectonicaController {
+@RequestMapping("/api/boligrafos")
+public class BoligrafoController {
 
     @Autowired
-    private ColumnaArquitectonicaService columnaArquitectonicaService;
+    private BoligrafoService boligrafoService;
 
     @PostMapping
-    public ColumnaArquitectonica create(@RequestBody ColumnaArquitectonica columnaArquitectonica) {
-        return columnaArquitectonicaService.create(columnaArquitectonica);
+    public Boligrafo create(@RequestBody Boligrafo columnaBoligrafo) {
+        return boligrafoService.create(columnaBoligrafo);
     }
 
     @GetMapping("/{id}")
-    public ColumnaArquitectonica read(@PathVariable("id") Long id) {
-        return columnaArquitectonicaService.read(id);
+    public Boligrafo read(@PathVariable("id") Long id) {
+        return boligrafoService.read(id);
     }
     
     @GetMapping
-    public List<ColumnaArquitectonica> list() {
-        return columnaArquitectonicaService.read();
+    public List<Boligrafo> list() {
+        return boligrafoService.read();
     }
 
     @PutMapping
-    public ColumnaArquitectonica update(@RequestBody ColumnaArquitectonica columnaArquitectonica) {
-        return columnaArquitectonicaService.update(columnaArquitectonica);
+    public Boligrafo update(@RequestBody Boligrafo columnaBoligrafo) {
+        return boligrafoService.update(columnaBoligrafo);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
-        columnaArquitectonicaService.delete(id);
+       boligrafoService.delete(id);
     }
 }

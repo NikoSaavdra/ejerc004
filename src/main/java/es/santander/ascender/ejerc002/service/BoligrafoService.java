@@ -5,40 +5,40 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.santander.ascender.ejerc002.model.ColumnaArquitectonica;
-import es.santander.ascender.ejerc002.repository.ColumnaArquitectonicaRepository;
+import es.santander.ascender.ejerc002.model.Boligrafo;
+import es.santander.ascender.ejerc002.repository.BoligrafoRepository;
 
 @Service
-public class ColumnaArquitectonicaService {
+public class BoligrafoService {
 
     @Autowired
-    private ColumnaArquitectonicaRepository repository;
+    private BoligrafoRepository repository;
 
-    public ColumnaArquitectonica create(ColumnaArquitectonica columnaArquitectonica) {
-        if (columnaArquitectonica.getId() != null) {
+    public Boligrafo create(Boligrafo columnaBoligrafo) {
+        if (columnaBoligrafo.getId() != null) {
             throw new CrudSecurityException("Han tratado de modificar un registro columna utilizando la creación",
                                                  CRUDOperation.CREATE, 
-                                                 columnaArquitectonica.getId());
+                                                 columnaBoligrafo.getId());
         }
-        return repository.save(columnaArquitectonica);
+        return repository.save(columnaBoligrafo);
     }
 
-    public ColumnaArquitectonica read(Long id) {
+    public Boligrafo read(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    public List<ColumnaArquitectonica> read() {
+    public List<Boligrafo> read() {
         return repository.findAll();
     }
 
-    public ColumnaArquitectonica update(ColumnaArquitectonica columnaArquitectonica) {
-        if (columnaArquitectonica.getId() == null) {
+    public Boligrafo update(Boligrafo columnaBoligrafo) {
+        if (columnaBoligrafo.getId() == null) {
             throw new CrudSecurityException("Han tratado de crear un registro columna utilizando la modifición",
                                                  CRUDOperation.UPDATE, 
                                                  null);
             
         }
-        return repository.save(columnaArquitectonica);
+        return repository.save(columnaBoligrafo);
     }
 
     public void delete(Long id) {
