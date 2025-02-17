@@ -53,7 +53,7 @@ public class BoligrafoRepositoryTests {
     @Test
     public void testEliminar() {
 
-        Boligrafo datoAGuardar = new Boligrafo(null, "Juan Ant", "Verde", true);
+        Boligrafo datoAGuardar = new Boligrafo(null, "Boli", "Verde", true);
         boligrafoRepository.save(datoAGuardar);
 
         boligrafoRepository.deleteById(datoAGuardar.getId());
