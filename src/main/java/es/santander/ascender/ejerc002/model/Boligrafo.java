@@ -17,8 +17,15 @@ public class Boligrafo {
     private String color;
     private boolean escribe;
 
-    public Boligrafo(Object object, String string, String string2, boolean b) {
+    public Boligrafo() {
 
+    }
+
+    public Boligrafo(Long id, String nombre, String color, boolean escribe) {
+       this.id = id;
+       this.nombre = nombre;
+       this.color = color;
+       this.escribe = escribe;
     }
 
     public Long getId() {
