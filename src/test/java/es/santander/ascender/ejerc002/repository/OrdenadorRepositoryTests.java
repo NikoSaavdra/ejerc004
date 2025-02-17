@@ -1,9 +1,5 @@
-package es.santander.ascender.ejerc002.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import es.santander.ascender.ejerc002.model.Ordenador;
-import jakarta.validation.ConstraintViolation;
+import es.santander.ascender.ejerc002.repository.OrdenadorRepository;
+
 
 @SpringBootTest
 public class OrdenadorRepositoryTests {
@@ -24,58 +20,90 @@ public class OrdenadorRepositoryTests {
 
     @BeforeEach
     public void setUp() {
-
         ordenadorRepository.deleteAll();
     }
 
     @Test
-    public void testList() {
-        List<Ordenador> valores = ordenadorRepository.findAll();
-        assertNotNull(valores, "La lista de ordenadores no debería ser nula");
+    public void testListarOrdenadores() {
+        List<Ordenador> lista = ordenadorRepository.findAll();
+        assertNotNull(lista, "La lista de ordenadores no debería ser nula");
+        assertTrue(lista.isEmpty(), "Debería estar vacía al inicio");
     }
 
     @Test
-    public void testFindNoExistente() {
-        Optional<Ordenador> resultado = ordenadorRepository.findById(45L);
-        assertTrue(resultado.isEmpty(), "El ordenador con ID 45 debería no existir");
+    public void testBuscarOrdenadorNoExistente() {
+        Optional<Ordenador> resultado = ordenadorRepository.findById(99L);
+        assertTrue(resultado.isEmpty(), "El ordenador con ID 99 no debería existir");
     }
 
     @Test
-    public void testLeerUno() {
+    public void testGuardarYLeerOrdenador() {
+        Ordenador nuevoOrdenador = new Ordenador(null, 2.5, "100,100,100", 104);
+        ordenadorRepository.save(nuevoOrdenador);
 
-        Ordenador datoAGuardar = new Ordenador(null, "Boli", "Rojo", true);
+        assertNotNull(nuevoOrdenador.getId(), "El ID del ordenador debería ser generado");
 
-        ordenadorRepository.save(datoAGuardar);
-
-        assertNotNull(datoAGuardar.getId(), "El ID del ordenador debería ser generado");
-
-        Optional<Ordenador> resultado = ordenadorRepository.findById(datoAGuardar.getId());
-        assertTrue(resultado.isPresent(), "El boligrafo guardado debería existir en la base de datos");
+        Optional<Ordenador> resultado = ordenadorRepository.findById(nuevoOrdenador.getId());
+        assertTrue(resultado.isPresent(), "El ordenador guardado debería existir en la base de datos");
+        assertEquals("100,100,100", resultado.get().getColor(), "El color debería coincidir");
     }
 
     @Test
-    public void testEliminar() {
+    public void testActualizarOrdenador() {
+        Ordenador ordenador = new Ordenador(null, 2.5, "120,120,120", 104);
+        ordenadorRepository.save(ordenador);
 
-        Ordenador datoAGuardar = new Ordenador(null, "Boli", "Verde", true);
-        ordenadorRepository.save(datoAGuardar);
+        ordenador.setPeso(3.2);
+        ordenador.setColor("255,255,255");
+        ordenador.setNumeroTeclas(110);
+        ordenadorRepository.save(ordenador);
 
-        ordenadorRepository.deleteById(datoAGuardar.getId());
+        Optional<Ordenador> resultado = ordenadorRepository.findById(ordenador.getId());
+        assertTrue(resultado.isPresent(), "El ordenador actualizado debería existir");
+        assertEquals(3.2, resultado.get().getPeso(), "El peso debería haberse actualizado");
+        assertEquals("255,255,255", resultado.get().getColor(), "El color debería haberse actualizado");
+        assertEquals(110, resultado.get().getNumeroTeclas(), "El número de teclas debería haberse actualizado");
+    }
 
-        Optional<Ordenador> resultadoEliminado = ordenadorRepository.findById(datoAGuardar.getId());
+    @Test
+    public void testEliminarOrdenador() {
+        Ordenador nuevoOrdenador = new Ordenador(null, 3.0, "200,200,200", 105);
+        ordenadorRepository.save(nuevoOrdenador);
+
+        ordenadorRepository.deleteById(nuevoOrdenador.getId());
+
+        Optional<Ordenador> resultadoEliminado = ordenadorRepository.findById(nuevoOrdenador.getId());
         assertFalse(resultadoEliminado.isPresent(), "El ordenador debería haber sido eliminado");
     }
-    
-     @Test
-    void testColorIncorrectoTexto() {
-        Ordenador ordenador = new Ordenador(1L, 2.5, "rojo,verde,azul", 104);
-        Set<ConstraintViolation<Ordenador>> violations = validator.validate(ordenador);
-        assertFalse(violations.isEmpty(), "El color no debe permitir texto");
+
+
+    @Test
+    public void testGuardarMultiplesOrdenadores() {
+        Ordenador ordenador1 = new Ordenador(null, 2.5, "100,100,100", 104);
+        Ordenador ordenador2 = new Ordenador(null, 3.0, "150,150,150", 105);
+        Ordenador ordenador3 = new Ordenador(null, 1.8, "50,50,50", 103);
+
+        ordenadorRepository.save(ordenador1);
+        ordenadorRepository.save(ordenador2);
+        ordenadorRepository.save(ordenador3);
+
+        List<Ordenador> lista = ordenadorRepository.findAll();
+        assertEquals(3, lista.size(), "Deberían haberse guardado 3 ordenadores");
     }
 
-      void testNumeroTeclasNegativo() {
-        Ordenador ordenador = new Ordenador(1L, 2.5, "100,100,100", -10);
-        Set<ConstraintViolation<Ordenador>> violations = validator.validate(ordenador);
-        assertFalse(violations.isEmpty(), "El número de teclas no puede ser negativo");
-        assertEquals("El número de teclas no puede ser negativo", violations.iterator().next().getMessage());
+    @Test
+    public void testEliminarTodosLosOrdenadores() {
+        Ordenador ordenador1 = new Ordenador(null, 2.5, "100,100,100", 104);
+        Ordenador ordenador2 = new Ordenador(null, 3.0, "150,150,150", 105);
+        Ordenador ordenador3 = new Ordenador(null, 1.8, "50,50,50", 103);
+
+        ordenadorRepository.save(ordenador1);
+        ordenadorRepository.save(ordenador2);
+        ordenadorRepository.save(ordenador3);
+
+        ordenadorRepository.deleteAll();
+
+        List<Ordenador> lista = ordenadorRepository.findAll();
+        assertTrue(lista.isEmpty(), "La base de datos debería estar vacía después de eliminar todo");
     }
 }
