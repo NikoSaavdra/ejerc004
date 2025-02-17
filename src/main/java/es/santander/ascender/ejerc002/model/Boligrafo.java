@@ -8,10 +8,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Boligrafo")
-public class Boligrafo{
+public class Boligrafo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    
 
     private Long id;
     private String nombre;
@@ -19,10 +18,9 @@ public class Boligrafo{
     private boolean escribe;
 
     public Boligrafo(Object object, String string, String string2, boolean b) {
-        
+
     }
 
-    // Getters y setters
     public Long getId() {
         return id;
     }

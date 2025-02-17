@@ -19,7 +19,7 @@ import es.santander.ascender.ejerc002.model.Boligrafo;
 import es.santander.ascender.ejerc002.service.BoligrafoService;
 
 @RestController
-@RequestMapping("/api/boligrafos")
+@RequestMapping("/api/boligrafo")
 public class BoligrafoController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class BoligrafoController {
     public Boligrafo read(@PathVariable("id") Long id) {
         return boligrafoService.read(id);
     }
-    
+
     @GetMapping
     public List<Boligrafo> list() {
         return boligrafoService.read();
@@ -47,6 +47,6 @@ public class BoligrafoController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
-       boligrafoService.delete(id);
+        boligrafoService.delete(id);
     }
 }

@@ -17,8 +17,8 @@ public class BoligrafoService {
     public Boligrafo create(Boligrafo columnaBoligrafo) {
         if (columnaBoligrafo.getId() != null) {
             throw new CrudSecurityException("Han tratado de modificar un registro columna utilizando la creación",
-                                                 CRUDOperation.CREATE, 
-                                                 columnaBoligrafo.getId());
+                    CRUDOperation.CREATE,
+                    columnaBoligrafo.getId());
         }
         return repository.save(columnaBoligrafo);
     }
@@ -34,9 +34,9 @@ public class BoligrafoService {
     public Boligrafo update(Boligrafo columnaBoligrafo) {
         if (columnaBoligrafo.getId() == null) {
             throw new CrudSecurityException("Han tratado de crear un registro columna utilizando la modifición",
-                                                 CRUDOperation.UPDATE, 
-                                                 null);
-            
+                    CRUDOperation.UPDATE,
+                    null);
+
         }
         return repository.save(columnaBoligrafo);
     }
