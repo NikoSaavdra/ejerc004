@@ -5,33 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.santander.ascender.ejerc002.model.Boligrafo;
-import es.santander.ascender.ejerc002.repository.BoligrafoRepository;
+
+import es.santander.ascender.ejerc002.repository.OrdenadorRepository;
 
 @Service
-public class BoligrafoService {
+public class OrdenadorService {
 
     @Autowired
-    private BoligrafoRepository repository;
+    private OrdenadorRepository repository;
 
-    public Boligrafo create(Boligrafo columnaBoligrafo) {
-        if (columnaBoligrafo.getId() != null) {
+    public Ordenador create(Ordenador ordenador) {
+        if (ordenador.getId() != null) {
             throw new CrudSecurityException("Han tratado de modificar un registro columna utilizando la creación",
                     CRUDOperation.CREATE,
-                    columnaBoligrafo.getId());
+                    ordenador.getId());
         }
-        return repository.save(columnaBoligrafo);
+        return repository.save(ordenador);
     }
 
-    public Boligrafo read(Long id) {
+    public Ordenador read(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    public List<Boligrafo> read() {
+    public List<Ordenador> read() {
         return repository.findAll();
     }
 
-    public Boligrafo update(Boligrafo columnaBoligrafo) {
+    public Ordenador update(Ordenador columnaBoligrafo) {
         if (columnaBoligrafo.getId() == null) {
             throw new CrudSecurityException("Han tratado de crear un registro columna utilizando la modifición",
                     CRUDOperation.UPDATE,

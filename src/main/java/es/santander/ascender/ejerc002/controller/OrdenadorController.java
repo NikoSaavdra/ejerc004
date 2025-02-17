@@ -15,38 +15,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.santander.ascender.ejerc002.model.Boligrafo;
-import es.santander.ascender.ejerc002.service.BoligrafoService;
+import es.santander.ascender.ejerc002.service.OrdenadorService;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/boligrafo")
-public class BoligrafoController {
+@RequestMapping("/api/ordenador")
+public class OrdenadorController {
 
     @Autowired
-    private BoligrafoService boligrafoService;
-
-    @PostMapping
-    public Boligrafo create(@RequestBody Boligrafo columnaBoligrafo) {
-        return boligrafoService.create(columnaBoligrafo);
-    }
+    private OrdenadorService ordenadorService;
 
     @GetMapping("/{id}")
-    public Boligrafo read(@PathVariable("id") Long id) {
-        return boligrafoService.read(id);
+    public Ordenador read(@PathVariable("id") Long id) {
+        return ordenadorService.read(id);
     }
 
     @GetMapping
-    public List<Boligrafo> list() {
-        return boligrafoService.read();
+    public List<Ordenador> list() {
+        return ordenadorService.read();
+    }
+
+    @PostMapping
+    public Ordenador create(@Valid @RequestBody Ordenador ordenador) {
+        return ordenadorService.create(ordenador);
     }
 
     @PutMapping
-    public Boligrafo update(@RequestBody Boligrafo columnaBoligrafo) {
-        return boligrafoService.update(columnaBoligrafo);
+    public Ordenador update(@Valid @RequestBody Ordenador ordenador) {
+        return ordenadorService.update(ordenador);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
-        boligrafoService.delete(id);
+        ordenadorService.delete(id);
     }
 }
