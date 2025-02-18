@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import es.santander.ascender.ejerc002.model.Ordenador;
 import es.santander.ascender.ejerc002.service.OrdenadorService;
 import jakarta.validation.Valid;
 

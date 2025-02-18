@@ -1,3 +1,5 @@
+package es.santander.ascender.ejerc002.model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +28,6 @@ public class Ordenador {
     @Min(value = 0, message = "El número de teclas no puede ser negativo")
     private int numeroTeclas;
 
-    // Constructores
     public Ordenador() {}
 
     public Ordenador(Long id, double peso, String color, int numeroTeclas) {

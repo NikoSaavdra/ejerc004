@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import es.santander.ascender.ejerc002.model.Ordenador;
 import es.santander.ascender.ejerc002.repository.OrdenadorRepository;
 
 @Service
